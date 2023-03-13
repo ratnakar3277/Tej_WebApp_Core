@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Tej_WebApp_Core.Models.DlvTaskList.DlvTaskListModel>
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DlvTaskListLayout.cshtml";
+}
+
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <style>
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .th, .td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .tr:nth-child(even) {
+            background-color: Lightgreen;
+        }
+
+        footer {
+            background-color: #065492;
+            color: white;
+            padding: 15px;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body style="font-family:Arial; font-size:15px;">
+    <form method="post" asp-controller="DlvTaskList" asp-action="Index">
+        @*<span>Cnote No:</span><input type="text" name="consmt_no" />
+        <input type="submit" value="Search" />
+        <br />*@
+        <br />
+@*        <div class="container mt-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" name="consmt_no" placeholder="Enter Cnote no." class="form-control" />                    
+                </div>
+                <div>
+                    <input type="submit" value="Search" class="btn btn-primary"/>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" name="consmt_no" placeholder="Enter Cnote No" class="form-control" /><br />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+        <div class="container mt-3">
+            @foreach (var item in Model)
+            {
+                <table class="table">
+                    <tr>
+                        <td>
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div>
+                                        <i class="fa fa-list" aria-hidden="true"></i>
+
+                                        <h4 style="display: inline-block" class="card-title"> @Html.DisplayFor(modelItem => item.consmt_no)</h4>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                        <p style="display: inline-block"> @Html.DisplayFor(modelItem => item.load_date)</p>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-address-card" aria-hidden="true"></i>
+                                        <p style="display: inline-block"> @Html.DisplayFor(modelItem => item.cnee_add)</p>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <p style="display: inline-block"> @Html.DisplayFor(modelItem => item.cnee_mob)</p>
+                                    </div>
+
+                                    <div style="text-align:center;">
+
+                                        <a href="@Url.Action("Create", "Delivered", new {pk_consmt_key=item.pk_consmt_key, pk_deliver_by=item.pk_pd_key,pk_branch_key=item.pk_branch_key})"><span><i class="btn btn-primary fa fa-forward"> Deliver</i></span></a>
+                                        <a href="@Url.Action("Create", "UnDelivered", new {pk_consmt_key=item.pk_consmt_key, consmt_no=item.consmt_no, pk_deliver_by=item.pk_pd_key,pk_branch_key=item.pk_branch_key})"><span><i class="btn btn-primary fa fa-backward"> Undeliver</i></span></a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+        <footer class="container-fluid text-center">
+            <p>@HttpContextAccessor.HttpContext.Session.GetString("f_name")</p>
+        </footer>
+    </form>
+</body>
+</html>

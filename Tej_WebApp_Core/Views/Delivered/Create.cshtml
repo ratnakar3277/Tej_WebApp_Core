@@ -1,0 +1,144 @@
+﻿@model Tej_WebApp_Core.Models.Delivered.DeliveredModel
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_DeliveredLayout.cshtml";
+}
+
+@*<h1>Create</h1>
+
+<h4>DeliveredModel</h4>*@
+
+<style>
+    .upload-btn-wrapper {
+        position: relative;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .file_btn {
+        border: 2px solid gray;
+        color: gray;
+        background-color: white;
+        padding: 8px 20px;
+        border-radius: 8px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .upload-btn-wrapper input[type=file] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+    }
+</style>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+@*            <div class="form-group">
+                <label asp-for="pk_consmt_key" class="control-label"></label>
+                <input asp-for="pk_consmt_key" class="form-control" />
+                <span asp-validation-for="pk_consmt_key" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pk_deliver_by" class="control-label"></label>
+                <input asp-for="pk_deliver_by" class="form-control" />
+                <span asp-validation-for="pk_deliver_by" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="pk_branch_key" class="control-label"></label>
+                <input asp-for="pk_branch_key" class="form-control" />
+                <span asp-validation-for="pk_branch_key" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input id="Hdf_pk_consmt_key" asp-for="pk_consmt_key" type="hidden" />
+                <input id="Hdf_pk_deliver_by" asp-for="pk_deliver_by" type="hidden" />
+                <input id="Hdf_pk_branch_key" asp-for="pk_branch_key" type="hidden" />
+                <input id="Hdf_crt_by" name="crt_by" asp-for="crt_by" type="hidden" value="@ViewBag.crt_by" />
+
+                
+
+                <label for="relation">Received By<span style="color:red;">*</span></label><br />
+                @*<label asp-for="received_by" class="control-label"></label>*@
+                <input asp-for="received_by" class="form-control" required />
+                <span asp-validation-for="received_by" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* <label asp-for="relation" class="control-label"></label>
+                <input asp-for="relation" class="form-control" />
+                <span asp-validation-for="relation" class="text-danger"></span>*@
+                <label for="relation">Relation<span style="color:red;">*</span></label><br />
+                <select asp-for="relation" required data-validate="Please select Relation" class="custom-select" style="height:30px; width:100%;">
+                    <option value="">Select Relation</option>
+                    <option value="Aunty">Aunty</option>
+                    <option value="Brother-In-Law">Brother-In-Law</option>
+                    <option value="Cousin">Cousin</option>
+                    <option value="Father-In-Law">Father-In-Law</option>
+                    <option value="Husband">Husband</option>
+                    <option value="Manager">Manager</option>
+                    <option value="Mother-In-Law">Mother-In-Law</option>
+                    <option value="Owner">Owner</option>
+                    <option value="Peon">Peon</option>
+                    <option value="Receptionist">Receptionist</option>
+                    <option value="Security/Watchman">Security/Watchman</option>
+                    <option value="Self">Self</option>
+                    <option value="Sister">Sister</option>
+                    <option value="Sister-In-Law">Sister-In-Law</option>
+                    <option value="Staff">Staff</option>
+                    <option value="StoreManager">Store Manager</option>
+                    <option value="Uncle">Uncle</option>
+                    <option value="Wife">Wife</option>
+                </select>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="id_proof" class="control-label"></label>
+                <input asp-for="id_proof" class="form-control" />
+                <span asp-validation-for="id_proof" class="text-danger"></span>*@
+                <label for="">ID Proof<span style="color:red;"> *</span></label><br />
+                <select asp-for="id_proof" required class="custom-select" style="height:30px; width:100%;">
+                    <option value="">Select ID Proof</option>
+                    <option value="AadhaarCard">Aadhaar Card</option>
+                    <option value="Pancard">Pancard</option>
+                    <option value="VotingCard">Voting Card</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="id_no_details" class="control-label"></label>
+                <input asp-for="id_no_details" class="form-control" required />
+                <span asp-validation-for="id_no_details" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="text-align:center;">
+                <div class="upload-btn-wrapper">
+                    <input class="form-control" name="postedFile" type="file" accept="image/*" required />
+                    <a href="#" class="btn btn-info btn-lg">
+                        <span class="glyphicon glyphicon-camera"></span> Camera
+                    </a>
+                </div>
+
+                @* <input type="file" name="postedFile" />
+                <input type="submit" id="btnUpload" value="Upload" />*@
+            </div>
+
+            @*<div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            </div>*@
+            <footer class="container-fluid text-center">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </footer>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+

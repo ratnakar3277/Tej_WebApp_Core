@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .btn {
+            background-color: #065492;
+            border: none;
+            color: white;
+            padding: 12px 16px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+        }
+
+            /* Darker background on mouse-over */
+            .btn:hover {
+                background-color: RoyalBlue;
+            }
+    </style>
+</head>
+<body style="font-family:'Times New Roman', Times, serif;">
+    <div class="text-center p-t-13 p-b-23">
+        <span class="txt1">
+            <img src="~/login/images/icons/tejlogomain.png" class="img-fluid" />
+        </span>
+    </div>
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            @*        <div class="col-sm-12 sidenav">
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            <p><a href="#">Link</a></p>
+            </div>*@
+
+            <div class="col-sm-12 sidenav">
+                <p style="text-align:left; color:#065492; font-weight:bold; font-size:20px;">Delivery</p>
+                <div class="well">
+                    <p><button class="btn"><i class="fa fa-briefcase"></i> Prepare DRS</button></p>
+                    @*<button class="btn"><i class="fa fa-home"></i> Home</button>
+                    <button class="btn"><i class="fa fa-bars"></i> Menu</button>
+                    <button class="btn"><i class="fa fa-trash"></i> Trash</button>
+                    <button class="btn"><i class="fa fa-close"></i> Close</button>
+                    <button class="btn"><i class="fa fa-folder"></i> Folder</button>*@
+                </div>
+                <div class="well">
+                    @*<p><button class="btn"><i class="fa fa-tasks"></i> Delivery Task List</button></p>*@
+                    @*                    <p>
+                    <button class="btn" href="@Url.Action("Index", "DlvTaskList", new {Area="DlvTaskList"})"><i class="fa fa-tasks"></i> Delivery Task List</button>
+                    </p>*@
+                    <a href="@Url.Action("Index", "DlvTaskList")" class="btn"><span><i class="fa fa-tasks"> Delivery Task List</i></span></a>
+                </div>
+                <div class="well">
+                    <button class="btn"><i class="fa fa-plus"></i> Add Delivery Consignments</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="height:20px; color:transparent;">
+    </div>
+
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+
+            <div class="col-sm-12 sidenav">
+                <p style="text-align:left; color:#065492; font-weight:bold; font-size:20px;">Pickup</p>
+                <div class="well">
+                    <p><button class="btn"><i class="fa fa-briefcase"></i> Prepare PRS</button></p>
+                </div>
+                <div class="well">
+                    <p><button class="btn"><i class="fa fa-tasks"></i> Pickup Task List</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
